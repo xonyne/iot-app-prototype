@@ -14,6 +14,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import ch.keutsa.prototype.model.RegularBundle;
+import ch.keutsa.prototype.model.basic.ConnectionCode;
+import ch.keutsa.prototype.model.basic.CustomTimestamp;
+import ch.keutsa.prototype.model.basic.Location;
+import ch.keutsa.prototype.model.basic.MacAddress;
+import ch.keutsa.prototype.model.basic.SSID;
 import prototype.keutsa.ch.root.R;
 
 public class MainActivity extends FragmentActivity {
