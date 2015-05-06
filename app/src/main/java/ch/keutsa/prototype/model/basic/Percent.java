@@ -3,17 +3,17 @@ package ch.keutsa.prototype.model.basic;
 /**
  * Created by SoullessStone on 05.05.2015.
  */
-public class Percent {
-    private Integer value;
-    public Percent(int initialValue){
-        this.value = initialValue;
+public final class Percent {
+    private final int value;
+
+    public Percent(int initialValue) {
+        if (initialValue<=100)
+            this.value = initialValue;
+        else
+            throw new IllegalArgumentException();
     }
 
-    public Integer getValue() {
+    public int getValue() {
         return value;
-    }
-
-    public void setValue(Integer value) {
-        this.value = value;
     }
 }

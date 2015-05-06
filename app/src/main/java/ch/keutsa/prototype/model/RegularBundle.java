@@ -9,6 +9,7 @@ import ch.keutsa.prototype.model.basic.SSID;
 /**
  * Created by SoullessStone on 05.05.2015.
  */
+// TODO (erfasst von Michel): final okay für alle?
 public final class RegularBundle {
     public final MacAddress clientMac;
     public final SSID clientSSID;

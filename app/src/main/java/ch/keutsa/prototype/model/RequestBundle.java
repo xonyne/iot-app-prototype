@@ -1,10 +1,7 @@
 package ch.keutsa.prototype.model;
 
-import ch.keutsa.prototype.model.basic.ConnectionCode;
 import ch.keutsa.prototype.model.basic.CustomTimestamp;
-import ch.keutsa.prototype.model.basic.Location;
 import ch.keutsa.prototype.model.basic.MacAddress;
-import ch.keutsa.prototype.model.basic.SSID;
 
 /**
  * Created by SoullessStone on 05.05.2015.

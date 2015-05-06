@@ -2,7 +2,6 @@ package ch.keutsa.prototype.model;
 
 import java.util.ArrayList;
 
-import ch.keutsa.prototype.model.basic.ConnectionCode;
 import ch.keutsa.prototype.model.basic.CustomTimestamp;
 import ch.keutsa.prototype.model.basic.Location;
 import ch.keutsa.prototype.model.basic.MacAddress;
@@ -23,6 +22,7 @@ public final class RequestAnswerBundle {
     public final WlanConnectionInformation wlanInfo;
     public final MobileConnectionInformation mobileInfo;
     public final Percent remainingAccu;
+    // TODO (erfasst von Michel): Weitere Punkte?
 
     public RequestAnswerBundle(MacAddress masterMac, MacAddress clientMac, CustomTimestamp clientTime, Location clientLocation, ArrayList<SSID> surroundingSSIDs, WlanConnectionInformation wlanInfo, MobileConnectionInformation mobileInfo, Percent remainingAccu) {
         this.masterMac = masterMac;

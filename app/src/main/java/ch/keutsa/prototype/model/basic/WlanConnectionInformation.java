@@ -6,6 +6,7 @@ package ch.keutsa.prototype.model.basic;
 public final class WlanConnectionInformation {
     public final MacAddress macAddress;
     public final SSID ssid;
+    // TODO (erfasst von Michel): Add more information
 
     public WlanConnectionInformation(MacAddress macAddress, SSID ssid) {
         this.macAddress = macAddress;
