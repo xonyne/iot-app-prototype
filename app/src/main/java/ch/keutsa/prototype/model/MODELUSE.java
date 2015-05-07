@@ -11,6 +11,6 @@ import ch.keutsa.prototype.model.basic.SSID;
  */
 public class MODELUSE {
     public MODELUSE(){
-        RegularBundle message = new RegularBundle(new MacAddress(), new SSID(), new Location(), new CustomTimestamp(), ConnectionCode.MOBILE);
+        // RegularBundle message = new RegularBundle(new MacAddress(), new SSID(), new Location(), new CustomTimestamp(), ConnectionCode.MOBILE);
     }
 }

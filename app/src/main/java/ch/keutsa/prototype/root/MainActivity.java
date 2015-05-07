@@ -110,7 +110,7 @@ public class MainActivity extends FragmentActivity {
                     log.i("getMacAddress: " + connectionInfo.getMacAddress());
                     //Log.i("getFrequency: " + connectionInfo.getFrequency());
                     log.i("getHiddenSSID: " + connectionInfo.getHiddenSSID());
-                    log.i("getIpAddress: " + connectionInfo.getIpAddress());
+                    log.i("getIpAddress: " + intToIp(connectionInfo.getIpAddress()));
                     log.i("getSupplicantState: " + connectionInfo.getSupplicantState());
                     log.i("getLinkSpeed: " + connectionInfo.getLinkSpeed());
                     log.i("getRssi: " + connectionInfo.getRssi());
@@ -123,6 +123,13 @@ public class MainActivity extends FragmentActivity {
         } else {
             log.i(getString(R.string.no_wifi_or_mobile));
         }
+    }
+    // TODO (erfasst von Michel): Funktioniert die Umwandlung von int zu IP?
+    private String intToIp(int i) {
+        return ((i >> 24) & 0xFF) + "." +
+                ((i >> 16) & 0xFF) + "." +
+                ((i >> 8) & 0xFF) + "." +
+                (i & 0xFF);
     }
 
     class Log {
