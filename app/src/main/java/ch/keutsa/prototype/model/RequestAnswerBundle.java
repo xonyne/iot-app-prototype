@@ -22,7 +22,6 @@ public final class RequestAnswerBundle {
     public final WlanConnectionInformation wlanInfo;
     public final MobileConnectionInformation mobileInfo;
     public final Percent remainingAccu;
-    // TODO (erfasst von Michel): Weitere Punkte?
 
     public RequestAnswerBundle(MacAddress masterMac, MacAddress clientMac, CustomTimestamp clientTime, Location clientLocation, ArrayList<SSID> surroundingSSIDs, WlanConnectionInformation wlanInfo, MobileConnectionInformation mobileInfo, Percent remainingAccu) {
         this.masterMac = masterMac;
