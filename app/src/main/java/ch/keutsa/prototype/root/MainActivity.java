@@ -10,23 +10,22 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.telephony.TelephonyManager;
 import android.text.method.ScrollingMovementMethod;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import ch.keutsa.prototype.model.RegularBundle;
-import ch.keutsa.prototype.model.basic.ConnectionCode;
-import ch.keutsa.prototype.model.basic.CustomTimestamp;
-import ch.keutsa.prototype.model.basic.Location;
-import ch.keutsa.prototype.model.basic.MacAddress;
-import ch.keutsa.prototype.model.basic.SSID;
+import ch.keutsa.prototype.service.TestServiceController;
 import prototype.keutsa.ch.root.R;
 
 public class MainActivity extends FragmentActivity {
-
+    private TestServiceController testServiceController = new TestServiceController();
     private static boolean wifiConnected = false;
     private static boolean mobileConnected = false;
     private Log log;
+    private static final String TAG = MainActivity.class.getName();
+
+    private TextView serviceStatus;
 
 
     @Override
@@ -36,8 +35,7 @@ public class MainActivity extends FragmentActivity {
         final Button button = (Button) findViewById(R.id.test_action);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                checkNetworkConnection();
-            }
+                checkNetworkConnection();            }
         });
         final Button button2 = (Button) findViewById(R.id.clear_action);
         button2.setOnClickListener(new View.OnClickListener() {
@@ -45,10 +43,33 @@ public class MainActivity extends FragmentActivity {
                 log.clear();
             }
         });
+        final Button button3 = (Button) findViewById(R.id.serviceControlButton);
+        button3.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                toggleService();
+            }
+        });
         TextView tv = (TextView) findViewById(R.id.outputText);
         tv.setMovementMethod(new ScrollingMovementMethod());
 
+        serviceStatus  = (TextView) findViewById(R.id.serviceStatusTextview);
+        if (testServiceController.isTestServiceRunning(getApplicationContext())){
+            serviceStatus.setText("Started");
+        }else{
+            serviceStatus.setText("Stopped");
+        }
         log = new Log();
+    }
+
+    private void toggleService() {
+        android.util.Log.v(TAG, "Started toggling Service: "+testServiceController.isTestServiceRunning(getApplicationContext()));
+        if (!testServiceController.isTestServiceRunning(getApplicationContext())){
+            testServiceController.startService(this);
+            serviceStatus.setText("Started");
+        }else{
+            testServiceController.stopService(this);
+            serviceStatus.setText("Stopped");
+        }
     }
 
     private String networkType() {
@@ -124,6 +145,7 @@ public class MainActivity extends FragmentActivity {
             log.i(getString(R.string.no_wifi_or_mobile));
         }
     }
+
     // TODO (erfasst von Michel): Funktioniert noch nicht.
     private String intToIp(int i) {
         return ((i >> 24) & 0xFF) + "." +
