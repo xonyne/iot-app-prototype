@@ -124,7 +124,7 @@ public class MainActivity extends FragmentActivity {
             log.i(getString(R.string.no_wifi_or_mobile));
         }
     }
-    // TODO (erfasst von Michel): Funktioniert die Umwandlung von int zu IP?
+    // TODO (erfasst von Michel): Funktioniert noch nicht.
     private String intToIp(int i) {
         return ((i >> 24) & 0xFF) + "." +
                 ((i >> 16) & 0xFF) + "." +
