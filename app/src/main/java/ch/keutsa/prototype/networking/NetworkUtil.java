@@ -14,39 +14,6 @@ import android.telephony.TelephonyManager;
 
 public class NetworkUtil {
 
-//    public static int TYPE_WIFI = 1;
-//    public static int TYPE_MOBILE = 2;
-//    public static int TYPE_NOT_CONNECTED = 0;
-//
-//
-//
-//    public static String getConnectivityStatusString(Context context) {
-//        int conn = NetworkUtil.getConnectivityStatus(context);
-//        String status = null;
-//        if (conn == NetworkUtil.TYPE_WIFI) {
-//            status = "Wifi enabled";
-//        } else if (conn == NetworkUtil.TYPE_MOBILE) {
-//            status = "Mobile data enabled";
-//        } else if (conn == NetworkUtil.TYPE_NOT_CONNECTED) {
-//            status = "Not connected to Internet";
-//        }
-//        return status;
-//    }
-//    private static int getConnectivityStatus(Context context) {
-//        ConnectivityManager cm = (ConnectivityManager) context
-//                .getSystemService(Context.CONNECTIVITY_SERVICE);
-//
-//        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
-//        if (null != activeNetwork) {
-//            if(activeNetwork.getType() == ConnectivityManager.TYPE_WIFI)
-//                return TYPE_WIFI;
-//
-//            if(activeNetwork.getType() == ConnectivityManager.TYPE_MOBILE)
-//                return TYPE_MOBILE;
-//        }
-//        return TYPE_NOT_CONNECTED;
-//    }
-
     public static String getConnectivityStatusString(Context context) {
         ConnectivityManager connMgr =
                 (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -70,6 +37,30 @@ public class NetworkUtil {
                     output += ("getLinkSpeed: " + connectionInfo.getLinkSpeed());
                     output += ("getRssi: " + connectionInfo.getRssi());
                     output += ("getNetworkId: " + connectionInfo.getNetworkId());
+                }
+            } else if (mobileConnected) {
+                output += "Mobile Connection: " + NetworkUtil.getNetworkType(context);
+            }
+        } else {
+            output += "No mobile or wifi connection...";
+        }
+        return output;
+    }
+
+    public static String getShortConnectivityStatusString(Context context) {
+        ConnectivityManager connMgr =
+                (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeInfo = connMgr.getActiveNetworkInfo();
+        String output = "";
+        if (activeInfo != null && activeInfo.isConnected()) {
+            boolean wifiConnected = activeInfo.getType() == ConnectivityManager.TYPE_WIFI;
+            boolean mobileConnected = activeInfo.getType() == ConnectivityManager.TYPE_MOBILE;
+            if (wifiConnected) {
+                output += "Connected to Network: ";
+                WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+                WifiInfo connectionInfo = wifiManager.getConnectionInfo();
+                if (connectionInfo != null) {
+                    output += ("getSSID: " + connectionInfo.getSSID());
                 }
             } else if (mobileConnected) {
                 output += "Mobile Connection: " + NetworkUtil.getNetworkType(context);

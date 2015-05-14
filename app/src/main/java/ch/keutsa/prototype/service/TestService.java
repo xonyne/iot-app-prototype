@@ -19,15 +19,9 @@ public class TestService extends Service {
 
     @Override
     public void onCreate() {
-        Log.d(TAG, "Starting Service");
-
-        // Initializing all the listeners
-
-        // Starting the scheduled task
         Log.v(TAG, "Starting timertasks");
         timer = new Timer();
         timer.schedule(new ScheduledSender(), START_DELAY, RUN_INTERVAL);
-        Log.v(TAG, "Timertask got started");
 
     }
 

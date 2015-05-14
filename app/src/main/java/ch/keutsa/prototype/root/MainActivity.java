@@ -3,6 +3,7 @@ package ch.keutsa.prototype.root;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.text.method.ScrollingMovementMethod;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -13,8 +14,6 @@ import prototype.keutsa.ch.root.R;
 
 public class MainActivity extends FragmentActivity {
     private static final String TAG = MainActivity.class.getName();
-    private static boolean wifiConnected = false;
-    private static boolean mobileConnected = false;
     private TestServiceController testServiceController = new TestServiceController();
     private Log log;
     private TextView serviceStatus;
@@ -27,6 +26,7 @@ public class MainActivity extends FragmentActivity {
         final Button button = (Button) findViewById(R.id.test_action);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                log.clear();
                 log.i(NetworkUtil.getConnectivityStatusString(getApplicationContext()));
             }
         });
@@ -55,12 +55,14 @@ public class MainActivity extends FragmentActivity {
     }
 
     private void toggleService() {
-        android.util.Log.v(TAG, "Started toggling Service: " + testServiceController.isTestServiceRunning(getApplicationContext()));
+        android.util.Log.v(TAG, "Toggling Service");
         if (!testServiceController.isTestServiceRunning(getApplicationContext())) {
             testServiceController.startService(this);
+            android.util.Log.v(TAG, "Service was not running, started it");
             serviceStatus.setText("Started");
         } else {
             testServiceController.stopService(this);
+            android.util.Log.v(TAG, "Service was  running, stopped it");
             serviceStatus.setText("Stopped");
         }
     }
