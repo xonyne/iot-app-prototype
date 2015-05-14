@@ -2,11 +2,9 @@ package ch.keutsa.prototype.service;
 
 import android.app.Activity;
 import android.app.ActivityManager;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
-import android.widget.TextView;
 
 /**
  * Created by SoullessStone on 13.05.2015.

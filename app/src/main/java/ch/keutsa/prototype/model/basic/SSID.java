@@ -5,7 +5,8 @@ package ch.keutsa.prototype.model.basic;
  */
 public class SSID {
     public final String value;
-    public SSID(String value){
+
+    public SSID(String value) {
         this.value = value;
     }
     // TODO (erfasst von Michel): Location an SSID pinnen?

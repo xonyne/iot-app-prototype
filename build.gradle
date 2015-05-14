@@ -12,9 +12,9 @@ buildscript {
     }
 }
 
-allprojects {
-    repositories {
-        jcenter()
-        maven { url 'https://repo.eclipse.org/content/repositories/paho-releases/' }
-    }
-}
+//allprojects {
+//    repositories {
+//        jcenter()
+//        maven { url 'https://repo.eclipse.org/content/repositories/paho-releases/' }
+//    }
+//}
