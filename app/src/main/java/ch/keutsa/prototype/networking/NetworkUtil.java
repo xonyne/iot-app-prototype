@@ -13,8 +13,14 @@ import android.telephony.TelephonyManager;
 
 
 public class NetworkUtil {
+    public static int i;
+    public int o;
 
-    public static String getConnectivityStatusString(Context context) {
+    public static String getConnectivityStatusString(Context context){
+        return getConnectivityStatusString(context, false);
+    }
+
+    public static String getConnectivityStatusString(Context context, boolean shortVersion) {
         ConnectivityManager connMgr =
                 (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeInfo = connMgr.getActiveNetworkInfo();
@@ -27,16 +33,18 @@ public class NetworkUtil {
                 WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
                 WifiInfo connectionInfo = wifiManager.getConnectionInfo();
                 if (connectionInfo != null) {
-                    output += ("getSSID: " + connectionInfo.getSSID());
-                    output += ("getBSSID: " + connectionInfo.getBSSID());
-                    output += ("getMacAddress: " + connectionInfo.getMacAddress());
-                    //output += ("getFrequency: " + connectionInfo.getFrequency());
-                    output += ("getHiddenSSID: " + connectionInfo.getHiddenSSID());
-                    output += ("getIpAddress: " + connectionInfo.getIpAddress());
-                    output += ("getSupplicantState: " + connectionInfo.getSupplicantState());
-                    output += ("getLinkSpeed: " + connectionInfo.getLinkSpeed());
-                    output += ("getRssi: " + connectionInfo.getRssi());
-                    output += ("getNetworkId: " + connectionInfo.getNetworkId());
+                    output += ("getSSID: " + connectionInfo.getSSID() + "\n");
+                    if (!shortVersion) {
+                        output += ("getBSSID: " + connectionInfo.getBSSID() + "\n");
+                        output += ("getMacAddress: " + connectionInfo.getMacAddress() + "\n");
+                        //output += ("getFrequency: " + connectionInfo.getFrequency() + "\n");
+                        output += ("getHiddenSSID: " + connectionInfo.getHiddenSSID() + "\n");
+                        output += ("getIpAddress: " + connectionInfo.getIpAddress() + "\n");
+                        output += ("getSupplicantState: " + connectionInfo.getSupplicantState() + "\n");
+                        output += ("getLinkSpeed: " + connectionInfo.getLinkSpeed() + "\n");
+                        output += ("getRssi: " + connectionInfo.getRssi() + "\n");
+                        output += ("getNetworkId: " + connectionInfo.getNetworkId() + "\n");
+                    }
                 }
             } else if (mobileConnected) {
                 output += "Mobile Connection: " + NetworkUtil.getNetworkType(context);
@@ -46,31 +54,6 @@ public class NetworkUtil {
         }
         return output;
     }
-
-    public static String getShortConnectivityStatusString(Context context) {
-        ConnectivityManager connMgr =
-                (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeInfo = connMgr.getActiveNetworkInfo();
-        String output = "";
-        if (activeInfo != null && activeInfo.isConnected()) {
-            boolean wifiConnected = activeInfo.getType() == ConnectivityManager.TYPE_WIFI;
-            boolean mobileConnected = activeInfo.getType() == ConnectivityManager.TYPE_MOBILE;
-            if (wifiConnected) {
-                output += "Connected to Network: ";
-                WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
-                WifiInfo connectionInfo = wifiManager.getConnectionInfo();
-                if (connectionInfo != null) {
-                    output += ("getSSID: " + connectionInfo.getSSID());
-                }
-            } else if (mobileConnected) {
-                output += "Mobile Connection: " + NetworkUtil.getNetworkType(context);
-            }
-        } else {
-            output += "No mobile or wifi connection...";
-        }
-        return output;
-    }
-
     private static String getNetworkType(Context context) {
         TelephonyManager teleMan = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
         int networkType = teleMan.getNetworkType();

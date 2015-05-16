@@ -3,7 +3,6 @@ package ch.keutsa.prototype.root;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.text.method.ScrollingMovementMethod;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -15,25 +14,27 @@ import prototype.keutsa.ch.root.R;
 public class MainActivity extends FragmentActivity {
     private static final String TAG = MainActivity.class.getName();
     private TestServiceController testServiceController = new TestServiceController();
-    private Log log;
+    private StatusTextviewWriter writer;
     private TextView serviceStatus;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        writer = new StatusTextviewWriter();
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         final Button button = (Button) findViewById(R.id.test_action);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                log.clear();
-                log.i(NetworkUtil.getConnectivityStatusString(getApplicationContext()));
+                writer.clear();
+                writer.i(NetworkUtil.getConnectivityStatusString(getApplicationContext()));
             }
         });
         final Button button2 = (Button) findViewById(R.id.clear_action);
         button2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                log.clear();
+                writer.clear();
             }
         });
         final Button button3 = (Button) findViewById(R.id.serviceControlButton);
@@ -51,7 +52,6 @@ public class MainActivity extends FragmentActivity {
         } else {
             serviceStatus.setText("Stopped");
         }
-        log = new Log();
     }
 
     private void toggleService() {
@@ -67,10 +67,10 @@ public class MainActivity extends FragmentActivity {
         }
     }
 
-    class Log {
+    class StatusTextviewWriter {
         TextView tv;
 
-        public Log() {
+        public StatusTextviewWriter() {
             tv = (TextView) findViewById(R.id.outputText);
         }
 

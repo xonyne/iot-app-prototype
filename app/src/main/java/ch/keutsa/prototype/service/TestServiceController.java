@@ -25,7 +25,6 @@ public class TestServiceController {
     }
 
     private boolean isServiceRunning(String serviceName, Context c) {
-        Log.v(TAG, "Trying to get running of service" + serviceName);
         try {
             ActivityManager manager = (ActivityManager) c.getSystemService(Activity.ACTIVITY_SERVICE);
             for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
