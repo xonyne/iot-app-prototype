@@ -20,7 +20,6 @@ public class MainActivity extends FragmentActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        writer = new StatusTextviewWriter();
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -52,6 +51,8 @@ public class MainActivity extends FragmentActivity {
         } else {
             serviceStatus.setText("Stopped");
         }
+
+        writer = new StatusTextviewWriter();
     }
 
     private void toggleService() {

@@ -33,9 +33,9 @@ public class NetworkUtil {
                 WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
                 WifiInfo connectionInfo = wifiManager.getConnectionInfo();
                 if (connectionInfo != null) {
-                    output += ("getSSID: " + connectionInfo.getSSID() + "\n");
+                    output += ("SSID: " + connectionInfo.getSSID());
                     if (!shortVersion) {
-                        output += ("getBSSID: " + connectionInfo.getBSSID() + "\n");
+                        output += ("\ngetBSSID: " + connectionInfo.getBSSID() + "\n");
                         output += ("getMacAddress: " + connectionInfo.getMacAddress() + "\n");
                         //output += ("getFrequency: " + connectionInfo.getFrequency() + "\n");
                         output += ("getHiddenSSID: " + connectionInfo.getHiddenSSID() + "\n");
