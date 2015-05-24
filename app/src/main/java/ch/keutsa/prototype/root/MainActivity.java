@@ -3,11 +3,17 @@ package ch.keutsa.prototype.root;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.text.method.ScrollingMovementMethod;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.io.IOException;
+
+import ch.keutsa.prototype.networking.MqttHandler;
 import ch.keutsa.prototype.networking.NetworkUtil;
+import ch.keutsa.prototype.networking.SerialHelper;
+import androidListener.TestBundle;
 import ch.keutsa.prototype.service.TestServiceController;
 import prototype.keutsa.ch.root.R;
 
@@ -16,6 +22,7 @@ public class MainActivity extends FragmentActivity {
     private TestServiceController testServiceController = new TestServiceController();
     private StatusTextviewWriter writer;
     private TextView serviceStatus;
+    private MqttHandler mqttHandler = new MqttHandler();
 
 
     @Override
@@ -40,6 +47,25 @@ public class MainActivity extends FragmentActivity {
         button3.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 toggleService();
+            }
+        });
+        final Button button4 = (Button) findViewById(R.id.sendMQTTButton);
+        button4.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Thread t = new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            TestBundle b = new TestBundle();
+                            String content = SerialHelper.toString(b);
+                            mqttHandler.sendMessage(content, "CLIENTID");
+                            Log.v(TAG, "Finished");
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+                t.start();
             }
         });
         TextView tv = (TextView) findViewById(R.id.outputText);

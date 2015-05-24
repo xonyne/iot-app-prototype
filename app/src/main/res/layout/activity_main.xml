@@ -10,20 +10,22 @@
         android:layout_height="wrap_content"
         android:text="check"
         android:id="@+id/test_action"
-        android:layout_marginTop="86dp"
-        android:layout_centerHorizontal="true" />
+        android:layout_below="@+id/clear_action"
+        android:layout_alignParentLeft="true" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="clear"
         android:id="@+id/clear_action"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="44dp" />
+        android:layout_below="@+id/view"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
     <View
         android:layout_width="fill_parent"
         android:layout_height="1dp"
-        android:background="@android:color/darker_gray"/>
+        android:background="@android:color/darker_gray"
+        android:id="@+id/view" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -47,8 +49,18 @@
         android:enabled="true"
         android:nestedScrollingEnabled="false"
         android:layout_below="@+id/test_action"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignRight="@+id/outputText"
+        android:layout_alignEnd="@+id/outputText" />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Send MQTT"
+        android:id="@+id/sendMQTTButton"
+        android:enabled="true"
+        android:nestedScrollingEnabled="false"
+        android:layout_alignTop="@+id/clear_action"
+        android:layout_alignRight="@+id/view"
+        android:layout_alignEnd="@+id/view" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -58,6 +70,5 @@
         android:id="@+id/serviceStatusTextview"
         android:layout_alignBaseline="@+id/serviceControlButton"
         android:layout_alignBottom="@+id/serviceControlButton"
-        android:layout_toRightOf="@+id/test_action"
-        android:layout_toEndOf="@+id/test_action" />
+        android:layout_toRightOf="@+id/test_action" />
 </RelativeLayout>
