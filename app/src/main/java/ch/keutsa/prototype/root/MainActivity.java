@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import java.io.IOException;
 
+import ch.keutsa.prototype.model.RegularBundle;
 import ch.keutsa.prototype.networking.MqttHandler;
 import ch.keutsa.prototype.networking.NetworkUtil;
 import ch.keutsa.prototype.networking.SerialHelper;
@@ -56,7 +57,7 @@ public class MainActivity extends FragmentActivity {
                     @Override
                     public void run() {
                         try {
-                            TestBundle b = new TestBundle();
+                            RegularBundle b = new RegularBundle();
                             String content = SerialHelper.toString(b);
                             mqttHandler.sendMessage(content, "CLIENTID");
                             Log.v(TAG, "Finished");
