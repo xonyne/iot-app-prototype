@@ -9,8 +9,10 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import java.io.IOException;
+import java.util.Date;
 
 import ch.keutsa.prototype.model.RegularBundle;
+import ch.keutsa.prototype.model.basic.Location;
 import ch.keutsa.prototype.networking.MqttHandler;
 import ch.keutsa.prototype.networking.NetworkUtil;
 import ch.keutsa.prototype.networking.SerialHelper;
@@ -23,7 +25,6 @@ public class MainActivity extends FragmentActivity {
     private TestServiceController testServiceController = new TestServiceController();
     private StatusTextviewWriter writer;
     private TextView serviceStatus;
-    private MqttHandler mqttHandler = new MqttHandler();
 
 
     @Override
@@ -57,9 +58,9 @@ public class MainActivity extends FragmentActivity {
                     @Override
                     public void run() {
                         try {
-                            RegularBundle b = new RegularBundle();
-                            String content = SerialHelper.toString(b);
-                            mqttHandler.sendMessage(content, "CLIENTID");
+                            RegularBundle bundle = new RegularBundle(NetworkUtil.getMacAddress(getApplicationContext()), NetworkUtil.getSSID(getApplicationContext()), new Location(1898.0, 1898.0), new Date(), NetworkUtil.getConnectionCode(getApplicationContext()));
+                            String content = SerialHelper.toString(bundle);
+                            MqttHandler.sendMessage(content, "CLIENTID");
                             Log.v(TAG, "Finished");
                         } catch (IOException e) {
                             e.printStackTrace();

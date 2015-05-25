@@ -12,7 +12,6 @@ import ch.keutsa.prototype.model.basic.SSID;
 /**
  * Created by SoullessStone on 05.05.2015.
  */
-// TODO (erfasst von Michel): final okay für alle?
 public final class RegularBundle implements Serializable{
     /**
      *
@@ -24,8 +23,11 @@ public final class RegularBundle implements Serializable{
     public final Date clientTime;
     public final ConnectionCode connectionCode;
 
+    /**
+     * Creates an example bundle
+     */
     public RegularBundle(){
-        this(new MacAddress("00-80-41-ae-fd-7e"), new SSID("Example"), new Location(0.0, 0.0), new Date(), ConnectionCode.MOBILE);
+        this(new MacAddress("ff-ff-ff-ff-ff-ff"), new SSID("Example"), new Location(0.0, 0.0), new Date(), ConnectionCode.UNKNOWN);
     }
 
     public RegularBundle(MacAddress clientMac, SSID clientSSID, Location clientLocation, Date clientTime, ConnectionCode connectionCode) {
@@ -43,5 +45,6 @@ public final class RegularBundle implements Serializable{
                 + "\n   clientTime=" + clientTime + "\n   connectionCode="
                 + connectionCode + "\n]";
     }
+
 
 }

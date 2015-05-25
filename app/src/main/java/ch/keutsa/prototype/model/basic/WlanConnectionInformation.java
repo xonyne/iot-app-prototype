@@ -5,6 +5,7 @@ import android.net.wifi.SupplicantState;
 /**
  * Created by SoullessStone on 05.05.2015.
  */
+@Deprecated
 public final class WlanConnectionInformation {
     public final SSID ssid;
     public final String bssid;
@@ -16,7 +17,6 @@ public final class WlanConnectionInformation {
     public final int rssi;
     public final int networkId;
 
-    // TODO (erfasst von Michel): Add more information
 
     public WlanConnectionInformation(SSID ssid, String bssid, MacAddress macAddress, boolean hiddenSSID, int ipAddress, SupplicantState supplicantState, int linkSpeed, int rssi, int networkId) {
         this.ssid = ssid;

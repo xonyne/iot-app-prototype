@@ -11,10 +11,12 @@ import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.telephony.TelephonyManager;
 
+import ch.keutsa.prototype.model.basic.ConnectionCode;
+import ch.keutsa.prototype.model.basic.MacAddress;
+import ch.keutsa.prototype.model.basic.SSID;
+
 
 public class NetworkUtil {
-    public static int i;
-    public int o;
 
     public static String getConnectivityStatusString(Context context){
         return getConnectivityStatusString(context, false);
@@ -54,6 +56,51 @@ public class NetworkUtil {
         }
         return output;
     }
+
+    public static SSID getSSID(Context context) {
+        ConnectivityManager connMgr =
+                (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeInfo = connMgr.getActiveNetworkInfo();
+        if (activeInfo != null && activeInfo.isConnected()) {
+            boolean wifiConnected = activeInfo.getType() == ConnectivityManager.TYPE_WIFI;
+            boolean mobileConnected = activeInfo.getType() == ConnectivityManager.TYPE_MOBILE;
+            if (wifiConnected) {
+                WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+                WifiInfo connectionInfo = wifiManager.getConnectionInfo();
+                if (connectionInfo != null) {
+                    return new SSID(connectionInfo.getSSID());
+                }
+            }
+        } else {
+        }
+        return null;
+    }
+
+    public static MacAddress getMacAddress(Context context){
+        WifiManager manager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+        WifiInfo info = manager.getConnectionInfo();
+        String address = info.getMacAddress();
+        return new MacAddress(address);
+    }
+
+    public static ConnectionCode getConnectionCode(Context context) {
+        ConnectivityManager connMgr =
+                (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeInfo = connMgr.getActiveNetworkInfo();
+        if (activeInfo != null && activeInfo.isConnected()) {
+            boolean wifiConnected = activeInfo.getType() == ConnectivityManager.TYPE_WIFI;
+            boolean mobileConnected = activeInfo.getType() == ConnectivityManager.TYPE_MOBILE;
+            if (wifiConnected) {
+                return ConnectionCode.WLAN;
+            } else if (mobileConnected) {
+                return ConnectionCode.MOBILE;
+            }
+        } else {
+            return ConnectionCode.OFFLINE;
+        }
+        return ConnectionCode.UNKNOWN;
+    }
+
     private static String getNetworkType(Context context) {
         TelephonyManager teleMan = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
         int networkType = teleMan.getNetworkType();
