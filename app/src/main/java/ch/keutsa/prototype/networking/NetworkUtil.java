@@ -63,7 +63,6 @@ public class NetworkUtil {
         NetworkInfo activeInfo = connMgr.getActiveNetworkInfo();
         if (activeInfo != null && activeInfo.isConnected()) {
             boolean wifiConnected = activeInfo.getType() == ConnectivityManager.TYPE_WIFI;
-            boolean mobileConnected = activeInfo.getType() == ConnectivityManager.TYPE_MOBILE;
             if (wifiConnected) {
                 WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
                 WifiInfo connectionInfo = wifiManager.getConnectionInfo();
@@ -71,9 +70,8 @@ public class NetworkUtil {
                     return new SSID(connectionInfo.getSSID());
                 }
             }
-        } else {
         }
-        return null;
+        return new SSID("No SSID");
     }
 
     public static MacAddress getMacAddress(Context context){

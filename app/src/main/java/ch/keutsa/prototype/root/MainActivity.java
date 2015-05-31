@@ -16,7 +16,6 @@ import ch.keutsa.prototype.model.basic.Location;
 import ch.keutsa.prototype.networking.MqttHandler;
 import ch.keutsa.prototype.networking.NetworkUtil;
 import ch.keutsa.prototype.networking.SerialHelper;
-import androidListener.TestBundle;
 import ch.keutsa.prototype.service.TestServiceController;
 import prototype.keutsa.ch.root.R;
 
